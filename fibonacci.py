@@ -13,9 +13,19 @@ def fibonacci(n):
 
 
 def process_output(numbers, out_pro):
-    '''funzione che restituisce una lista contenente i numeri di fibonacci
-       come parametri prende una lista di numeri
-       e l'output per poter comunicare con la funzione process_factor
+    '''
+    Funzione che chima si serialmente la funzione per
+    trovare l'n-esimo numero di fibonacci, ma viene eseguita
+    dai vari processi parallelamente
+
+    Parameters
+    ----------
+    numbers : list
+        lista di numeri di cui calcolare il numero
+        di fibonaccci assegnata ad un processo
+
+    out_pro : method
+        coda degli output
     '''
     x = []
     for i in numbers:
@@ -25,9 +35,22 @@ def process_output(numbers, out_pro):
     out_pro.put(x)
 
 
-def process_prime(numbers, npro):
-    '''funzione che crea i processi che verranno utilizzati
-       i parametri sono una lista di numeri e il numero di processi da eseguire
+def process_fibo(numbers, npro):
+    '''
+    Funzione che crea i processi che verranno utilizzati
+
+    Parameters
+    ----------
+    numbers : list
+        lista completa di numeri di cui calcolare
+        il numero di fibonaccci
+    npro : int
+        numero di processi da eseguire
+
+    Returns
+    ----------
+    result : dict
+        dizionario contenente tutti gli output
     '''
 
     out = mp.Queue() # coda degli output
@@ -68,7 +91,7 @@ if __name__ == "__main__":
 
     start = time.time()
 
-    a = process_prime(numbers, npro)
+    a = process_fibo(numbers, npro)
 
     end = time.time() - start
 

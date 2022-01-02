@@ -4,7 +4,17 @@ import multiprocessing as mp
 
 
 def fattori(n):
-    ''' calcolo brutale dei fattori primi di un numero
+    '''
+    Calcolo brutale dei fattori primi di un numero
+    Parameters
+    ----------
+    n : int
+        numero di cui calcolare i fattori primi
+
+    Returns
+    ----------
+    f : list
+        lista dei fattori primi di n
     '''
     i = 2
     f = []
@@ -20,17 +30,34 @@ def fattori(n):
 
 
 def seriale(nft):
-    '''funzione che fattorizza gli elementi dell'array serialmente
-       prende come parametro solo la lista dei numeri e restituisce
-       la fattorizzazione in un dizionario
+    '''
+    Funzione che chima serialmente la funzione per
+    fattorizzare dei numeri
+
+    Parameters
+    ----------
+    nft : list
+        lista dei numeri da fattorizzare
+
+    Returns
+    ----------
+    dizionario contenente le fattorizzazzione
     '''
     return {n: fattori(n) for n in nft}
 
 
 def process_output(ntf, out_pro):
-    '''funzione che effettivamente restituisce la fattorizzazione
-       come parametri prende la lista di numeri da fattorizzare
-       e l'output per poter comunicare con la funzione process_factor
+    '''
+    Funzione che chima si serialmente la funzione per
+    fattorizzare dei numeri, ma viene eseguita
+    dai vari processi parallelamente
+
+    Parameters
+    ----------
+    ntf : list
+        lista di numeri da fattorizzare assegnata ad un processo
+    out_pro : method
+        coda degli output
     '''
     out = {}
 
@@ -41,9 +68,20 @@ def process_output(ntf, out_pro):
 
 
 def process_factor(ntf, npro):
-    '''funzione che crea i processi che verranno utilizzati
-       i parametri sono la lista di numeri da fattorizzare e
-       il numero di processi da eseguire
+    '''
+    Funzione che crea i processi che verranno utilizzati
+
+    Parameters
+    ----------
+    ntf : list
+        lista completa dei numeri da fattorizzare
+    npro : int
+        numero di processi da eseguire
+
+    Returns
+    ----------
+    result : dict
+        dizionario contenente tutti gli output
     '''
 
     out = mp.Queue() # coda degli output
@@ -74,9 +112,15 @@ def process_factor(ntf, npro):
 
 
 def test(ntf):
-    '''test delle prestazioni di calcolo seriale e parallelo
-       prende solo lista di numeri da fattorizzare, stampa su shell
-       il tempo impiegato per il calcolo
+    '''
+    test delle prestazioni di calcolo seriale e parallelo
+    stampa su shell il tempo impiegato per il calcolo
+
+    Parameters
+    ----------
+    ntf : list
+        lista completa dei numeri da fattorizzare
+
     '''
     #test seriale
     start = time.time()

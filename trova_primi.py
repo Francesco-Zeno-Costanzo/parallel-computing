@@ -5,7 +5,16 @@ import multiprocessing as mp
 import matplotlib.pyplot as plt
 
 def isPrime(n):
-    '''test di primalità
+    '''
+    test di primalità
+    Parameters
+    ----------
+    n : int
+        numero di cui controllare la primalità
+
+    Rerturns
+    ----------
+    Booleans, true se n è primo False altrimenti
     '''
     if n == 1 or n%2 == 0 and n != 2:
          return False
@@ -18,9 +27,18 @@ def isPrime(n):
 
 
 def process_output(numbers, out_pro):
-    '''funzione che restituisce una lista contenente i numeri primi
-       come parametri prende la lista di numeri di cui controllare la primalità
-       e l'output per poter comunicare con la funzione process_prime
+    '''
+    Funzione che chima si serialmente la funzione per
+    verificare la primalità dei numeri, ma viene eseguita
+    dai vari processi parallelamente
+
+    Parameters
+    ----------
+    numbers : list
+        lista di numeri di cui controllare
+        la primalità assegnata ad un processo
+    out_pro : method
+        coda degli output
     '''
     x = []
     for i in numbers:
@@ -31,9 +49,20 @@ def process_output(numbers, out_pro):
 
 
 def process_prime(numbers, npro):
-    '''funzione che crea i processi che verranno utilizzati
-       i parametri sono la lista di numeri di cui controllare la primalità e
-       il numero di processi da eseguire
+    '''
+    Funzione che crea i processi che verranno utilizzati
+
+    Parameters
+    ----------
+    numbers : list
+        lista completa di numeri di cui controllare la primalità
+    npro : int
+        numero di processi da eseguire
+
+    Returns
+    ----------
+    result : list
+        lista contenente tutti gli output
     '''
 
     out = mp.Queue() # coda degli output
@@ -74,8 +103,13 @@ def Li(x):
 
 
 def plot(a):
-    '''grafico della funzione enunumerativa
-       prende in imput la "lista" dei primi
+    '''
+    Grafico della funzione enunumerativa
+
+    Parameters
+    ----------
+    a : list
+        lista dei numeri primi trovati dai processi
     '''
     #inserisco i primi in una lista, a è una lista di liste
     x = []
